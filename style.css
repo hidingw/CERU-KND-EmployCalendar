@@ -3,7 +3,11 @@
 }
 
 .logo--small {
-	max-width: 150px;
+	max-width: 195px;
 	display: block;
 	margin: 0 auto;
+}
+
+.btn {
+	margin-bottom: 10px;
 }
