@@ -1,0 +1,9 @@
+.form-group {
+	margin-bottom: 5px;
+}
+
+.logo--small {
+	max-width: 150px;
+	display: block;
+	margin: 0 auto;
+}
