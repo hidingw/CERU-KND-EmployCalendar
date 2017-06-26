@@ -18,7 +18,7 @@
 	<div class="container">
 		<img src="src/cef-logo-small.png" alt="logo" width="100" height="100">
 		<div class="row">
-			<div class="col-md-2">
+			<div class="col-md-12">
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#new-empl">Добавить сотрудника</button>
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#set-time">Запонить табель</button>
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#reports">Отчеты</button>
@@ -30,11 +30,25 @@
 	<div class="modal fade" id="new-empl">
 		<div class="modal-dialog">
 			<div class="modal-content">
-				<div class="modal-header">
-					<div class="modal-title">x</div>
+				<div class="modal-body">
+					<form id="modal__new-employer"> 
+						<label for="modal__login">Login: <input type="text" name="modal__login" id="m__log"></label>
+						<label for="modal__l-name">Фамилия: <input type="text" name="modal__l-name" id="m__l-name"></label>
+						<label for="modal__f-name">Имя: <input type="text" name="modal__f-name" id="m__f-name"></label>
+						<label for="modal__s-name">Отчество: <input type="text" name="modal__s-name" id="m__s-name"></label>
+						<label for="modal__supervisor">Супервизор
+							<select>
+								<option value="romdv">Романьков</option>
+								<option value="kadke">Кадемалиева</option>
+								<option value="fedno">Федоренко</option>
+							</select>
+						</label>
+					</form>
 				</div>
-				<div class="modal-body">lorem ip</div>
-				<div class="modal-footer">ssss</div>
+				<div class="modal-footer">
+					<button type="submit" form="modal__new-employer" value="Создать">Создать</button>
+					<button data-dismiss="modal" value="Отмена">Отмена</button>
+				</div>
 			</div>
 		</div>
 	</div>
