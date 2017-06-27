@@ -11,3 +11,13 @@
 .btn {
 	margin-bottom: 10px;
 }
+
+.main-footer{
+	margin-left: 40px;
+	font-size: 10px;
+	color: #d3d3d3;
+}
+
+.company-name {
+	color: #dd0000;
+}

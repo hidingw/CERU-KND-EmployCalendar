@@ -13,41 +13,69 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<link rel="stylesheet" href="style.css">
+
 </head>
 <body>
-	<div class="container">
-		<img src="src/cef-logo-small.png" alt="logo" width="100" height="100">
-		<div class="row">
-			<div class="col-md-12">
+	<nav class="navbar navbar-default navbar-static-top" role="navigation">
+  		<div class="container">
+    		<a href="#" class="navbar-brand"><img src="src/cef-logo-small.png" alt="logo" style="width:70px; margin-top:-20px;"></a>
+			<div class="navbar-right" style="margin-top: 5px;">
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#new-empl">Добавить сотрудника</button>
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#set-time">Запонить табель</button>
 				<button class="btn btn-lg btn-default" data-toggle="modal" data-target="#reports">Отчеты</button>
 			</div>
-		</div>
-	</div>
+  		</div>
+	</nav>
 
 	<!-- Create new employ modal-window -->
 	<div class="modal fade" id="new-empl">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<form id="modal__new-employer"> 
-						<label for="modal__login">Login: <input type="text" name="modal__login" id="m__log"></label>
-						<label for="modal__l-name">Фамилия: <input type="text" name="modal__l-name" id="m__l-name"></label>
-						<label for="modal__f-name">Имя: <input type="text" name="modal__f-name" id="m__f-name"></label>
-						<label for="modal__s-name">Отчество: <input type="text" name="modal__s-name" id="m__s-name"></label>
-						<label for="modal__supervisor">Супервизор
-							<select>
-								<option value="romdv">Романьков</option>
-								<option value="kadke">Кадемалиева</option>
-								<option value="fedno">Федоренко</option>
-							</select>
-						</label>
+					<form class="form-horizontal" role="form" id="modal__new-employer"> 
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__login">Login: </label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="modal__login" id="m__log">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__l-name">Фамилия: </label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="modal__l-name" id="m__l-name">		
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__f-name">Имя: </label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="modal__f-name" id="m__f-name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__s-name">Отчество: </label>
+							<div class="col-md-8">
+								<input class="form-control" type="text" name="modal__s-name" id="m__s-name">
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__supervisor">Супервизор: </label>
+							<div class="col-md-8">
+								<select class="form-control">
+									<option value="romdv">Романьков</option>
+									<option value="kadke">Кадемалиева</option>
+									<option value="fedno">Федоренко</option>
+								</select>
+							</div>
+						</div>
 					</form>
 				</div>
 				<div class="modal-footer">
-					<button type="submit" form="modal__new-employer" value="Создать">Создать</button>
-					<button data-dismiss="modal" value="Отмена">Отмена</button>
+					<div class="row">
+						<div class="col-md-8 col-md-offset-2">
+							<button class="btn btn-default btn-block btn-success" type="submit" form="modal__new-employer" value="Создать">Создать</button>
+							<button class="btn btn-default btn-block btn-danger" data-dismiss="modal" value="Отмена">Отмена</button>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -58,10 +86,61 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<div class="modal-title">x</div>
+				<h5>Выберети сотрудников и укажите количество часов</h5>
 			</div>
-			<div class="modal-body">lorem ip</div>
-			<div class="modal-footer">ssss</div>
+			<div class="modal-body">
+			<!-- Здесь скриптом надо будет генерить список сотрудников. Селект по СВ (СВ узнаем при логине и храним в localStorage) -->
+				<form class="form-horizontal" role="form" id="modal__work-time">
+					<div class="form-group">
+						<label class="control-label col-md-2" for="modal__empl-list">Сотрудники:</label>
+						<div class="col-md-8">
+							<select class="form-control" multiple size="5" name="modal__empl-list" id="m-empl-list">
+								<option value="1">Здесь</option>
+								<option value="2">Будет</option>
+								<option value="3">Список</option>
+								<option value="4">Сотрудников</option>
+								<option value="5">СВ</option>
+								<option value="6">из</option>
+								<option value="7">базы</option>
+								<option value="8">данных</option>
+						</select>		
+						</div>
+					</div>
+					<div class="form-group">
+					<label class="control-label col-md-2" for="modal__count-work-hours">Кол-во часов: </label>
+						<div class="col-md-8">
+							<input class="form-control" type="text" name="modal__count-work-hours" id="m__count-work-hours">	
+						</div>
+					</div>
+					<div class="form-group">
+					<label class="control-label col-md-2" for="modal__calendar">Дата: </label>
+						<div class="col-md-8">
+							<input class="form-control" type="date" name="modal__calendar" id="modal__calendar" value="" max="">
+						</div>
+					</div>						
+
+				<!-- Разобраться с защитой и автоустановкой текущей даты -->
+				<!-- <script>
+					document.addEventListener('click', function(){
+					    var d = new Date();
+					    var day = d.getDate();
+					    var month = d.getMonth() + 1;
+					    var year = d.getFullYear();
+					    var calendar = document.getElementById('modal__calendar')
+					    calendar.value = day + "-" + "0" + month + "-" + year;
+					    calendar.max = day + "-" + "0" + month + "-" + year;
+					});
+				</script> -->
+				<!--  -->
+
+				</form>
+			</div>
+			<div class="modal-footer">
+				<div class="col-md-8 col-md-offset-2">
+					<button class="btn btn-default btn-block btn-success" type="submit" form="modal__work-time" value="Внести">Внести</button>
+					<button class="btn btn-default btn-block btn-danger" data-dismiss="modal" value="Отмена">Отмена</button>
+				</div>
+			</div>
 		</div>
 	</div>
 	</div>
@@ -83,22 +162,11 @@
 
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	
+	<!-- footer -->
+	<div class="row navbar-fixed-bottom">
+		<p class="main-footer">Designed by hidingw &copy; 2017 For the Krasnodar branch <span class="company-name">CREDITEXPRESS Group</span></p>
+	</div>
 
 </body>
 </html>
-
-
-
-
-<!-- 				<form>
-					<label for="empl-login">Логин</label>
-					<input type="text" id="empl-login" name="login">
-					<label for="empl-f-name">Фамилия</label>
-					<input type="text" id="empl-f-name" name="f-name">
-					<label for="empl-l-name">Имя</label>
-					<input type="text" id="empl-l-name" name="l-name">
-					<label for="empl-s-name">Отчество</label>	
-					<input type="text" id="empl-s-name" name="s-name">
-					<label for="empl-group">Группа</label>	
-					<input type="text" id="empl-group" name="group">
-				</form> -->
