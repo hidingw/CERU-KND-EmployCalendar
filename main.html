@@ -27,40 +27,46 @@
   		</div>
 	</nav>
 
-	<!-- Create new employ modal-window -->
+	<!-- Create new employee modal-window -->
 	<div class="modal fade" id="new-empl">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-body">
-					<form class="form-horizontal" role="form" id="modal__new-employer"> 
+					<form class="form-horizontal" role="form" id="modal__new-employer" action="includes/new_user.php" method="POST"> 
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__login">Login: </label>
 							<div class="col-md-8">
-								<input class="form-control" type="text" name="modal__login" id="m__log">
+								<input class="form-control" type="text" name="modal__login" id="m__log" required>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="modal__password">Password: </label>
+							<div class="col-md-8">
+								<input class="form-control" type="password" name="modal__password" id="m__pass" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__l-name">Фамилия: </label>
 							<div class="col-md-8">
-								<input class="form-control" type="text" name="modal__l-name" id="m__l-name">		
+								<input class="form-control" type="text" name="modal__l-name" id="m__l-name" required>		
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__f-name">Имя: </label>
 							<div class="col-md-8">
-								<input class="form-control" type="text" name="modal__f-name" id="m__f-name">
+								<input class="form-control" type="text" name="modal__f-name" id="m__f-name" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__s-name">Отчество: </label>
 							<div class="col-md-8">
-								<input class="form-control" type="text" name="modal__s-name" id="m__s-name">
+								<input class="form-control" type="text" name="modal__s-name" id="m__s-name" required>
 							</div>
 						</div>
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__supervisor">Супервизор: </label>
 							<div class="col-md-8">
-								<select class="form-control">
+								<select class="form-control" name="modal__supervisor" id="m__sv" required>
 									<option value="romdv">Романьков</option>
 									<option value="kadke">Кадемалиева</option>
 									<option value="fedno">Федоренко</option>
