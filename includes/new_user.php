@@ -27,17 +27,17 @@
 				)"
 			);
 	?>
-<div class="alert alert-success" role="alert">Сотрудник успешно добавлен. <a href="../main.html">Назад</a></div>
+<div class="alert alert-success" role="alert">Сотрудник успешно добавлен. <a href="../index.php">Назад</a></div>
 
 <?php
-	header('Location: ../main.html');	
+	header('Location: ../index.php');	
 	} else {
 
 ?>
 
 <div class="container">
 	<div class="row" style="margin-top: 20px;">
-		<div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">Пользователь с таким логином уже существует. <a href="../main.html">Назад</a></div>
+		<div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">Пользователь с таким логином уже существует. <a href="../index.php">Назад</a></div>
 	</div>
 </div>
 	

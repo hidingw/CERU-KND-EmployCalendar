@@ -29,8 +29,6 @@
 	
 	<link rel="stylesheet" href="style.css">
 
-
-
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -62,12 +60,6 @@
 								<input class="form-control" type="text" name="modal__login" id="m__log" required>
 							</div>
 						</div>
-						<!-- <div class="form-group">
-							<label class="col-md-2 control-label" for="modal__password">Password: </label>
-							<div class="col-md-8">
-								<input class="form-control" type="password" name="modal__password" id="m__pass" required>
-							</div>
-						</div> -->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__lname">Фамилия: </label>
 							<div class="col-md-8">
@@ -133,7 +125,7 @@
 															);
 								$result = $rows->fetch_assoc();
 								do{
-									echo "<option value='".$result[id]."'>".$result[l_name]." ".$result[f_name];
+									echo "<option value='".$result[id]."'>".$result[l_name]." ".$result[f_name]."</option>\n";
 								}
 								while ($result = $rows->fetch_assoc());
 
@@ -154,20 +146,6 @@
 							<input class="form-control" type="date" name="modal__calendar" id="modal__calendar" value="" max="">
 						</div>
 					</div>						
-
-				<!-- Разобраться с защитой и автоустановкой текущей даты -->
-				<!-- <script>
-					document.addEventListener('click', function(){
-					    var d = new Date();
-					    var day = d.getDate();
-					    var month = d.getMonth() + 1;
-					    var year = d.getFullYear();
-					    var calendar = document.getElementById('modal__calendar')
-					    calendar.value = day + "-" + "0" + month + "-" + year;
-					    calendar.max = day + "-" + "0" + month + "-" + year;
-					});
-				</script> -->
-				<!--  -->
 
 				</form>
 			</div>
