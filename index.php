@@ -1,4 +1,19 @@
+<?php
+		require 'includes/db.php';
+
+		session_start();
+		if(!isset($_SESSION['user_login'])){
+			header('Location: ../auth.html');
+		}
+
+		$connection = connect_db();
+
+
+	?>
+
+
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
 	<meta charset="UTF-8">
@@ -14,6 +29,8 @@
 	
 	<link rel="stylesheet" href="style.css">
 
+
+
 </head>
 <body>
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
@@ -26,6 +43,12 @@
 			</div>
   		</div>
 	</nav>
+	<div class="container">
+		<div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2" role="alert">
+	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  			Приветсвую <strong><?php echo $_SESSION['user_login']; ?></strong>
+		</div>
+	</div>
 
 	<!-- Create new employee modal-window -->
 	<div class="modal fade" id="new-empl">
@@ -39,12 +62,12 @@
 								<input class="form-control" type="text" name="modal__login" id="m__log" required>
 							</div>
 						</div>
-						<div class="form-group">
+						<!-- <div class="form-group">
 							<label class="col-md-2 control-label" for="modal__password">Password: </label>
 							<div class="col-md-8">
 								<input class="form-control" type="password" name="modal__password" id="m__pass" required>
 							</div>
-						</div>
+						</div> -->
 						<div class="form-group">
 							<label class="col-md-2 control-label" for="modal__lname">Фамилия: </label>
 							<div class="col-md-8">
@@ -95,20 +118,27 @@
 				<h5>Выберети сотрудников и укажите количество часов</h5>
 			</div>
 			<div class="modal-body">
-			<!-- Здесь скриптом надо будет генерить список сотрудников. Селект по СВ (СВ узнаем при логине и храним в localStorage) -->
+			<!-- Здесь скриптом надо будет генерить список сотрудников. Селект по СВ (СВ узнаем при логине и храним в $_SESSION) -->
 				<form class="form-horizontal" role="form" id="modal__work-time">
 					<div class="form-group">
 						<label class="control-label col-md-2" for="modal__empl-list">Сотрудники:</label>
 						<div class="col-md-8">
 							<select class="form-control" multiple size="5" name="modal__empl-list" id="m-empl-list">
-								<option value="1">Здесь</option>
-								<option value="2">Будет</option>
-								<option value="3">Список</option>
-								<option value="4">Сотрудников</option>
-								<option value="5">СВ</option>
-								<option value="6">из</option>
-								<option value="7">базы</option>
-								<option value="8">данных</option>
+								
+								<!-- Вынимаем из сессии логин СВ, выбираем из БД всех его сотрудников и кладем в список -->
+								<?php
+								$rows = $connection->query("SELECT l_name, f_name, id
+															FROM employee
+															WHERE supervisor = '$_SESSION[user_login]'"
+															);
+								$result = $rows->fetch_assoc();
+								do{
+									echo "<option value='".$result[id]."'>".$result[l_name]." ".$result[f_name];
+								}
+								while ($result = $rows->fetch_assoc());
+
+								?>
+
 						</select>		
 						</div>
 					</div>

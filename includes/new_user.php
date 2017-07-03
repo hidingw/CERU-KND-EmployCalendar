@@ -17,10 +17,9 @@
 
 		if($rows->num_rows == 0){
 		$connection -> query(
-			"INSERT INTO employee (login, password, f_name, l_name, s_name, supervisor) 
+			"INSERT INTO employee (login, f_name, l_name, s_name, supervisor) 
 			VALUES (
-				'$_POST[modal__login]', 
-				'$_POST[modal__password]', 
+				'$_POST[modal__login]',  
 				'$_POST[modal__fname]', 
 				'$_POST[modal__lname]', 
 				'$_POST[modal__sname]',
