@@ -1,17 +1,18 @@
 <?php
 	require "db.php";
 
-	$data = $POST;
+	$connection = connect_db();
+	$rows = $connection -> query("SELECT login, password 
+						  FROM users
+						  WHERE login = '$_POST[login]'");
+	$result = $rows->fetch_assoc();
 
-	$user = R::find('employee','login == $data.[login]');
-	if( $user.password == $data.password) {
-	 //header('Location: ../main.html'); 
-		echo "<h1>Well done!</h1> ";
+	if($rows->num_rows == 1 && $result[password] == $_POST[password]){
+		header('Location: ../main.html');
+	} else {
+		echo "Логин или пароль указаны неверно";
 	}
-	else {
-		echo "<h1>Something was wrong...</h1> ";
-		echo $user.login;	
-	}
+
 	
 
 ?>

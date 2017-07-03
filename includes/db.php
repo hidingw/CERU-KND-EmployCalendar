@@ -1,4 +1,10 @@
 <?php 
-	require "../lib/rb.php";
-	R::setup( 'mysql:host=localhost;dbname=tabel-tst','root', '' );
+	function connect_db(){
+		$mysqli = new mysqli('localhost','root', '', 'tabel-tst');
+		if($mysqli->connect_errno) { 
+			echo "Не удалось подключиться к MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+		}else {
+			return $mysqli;
+		}
+	}
  ?>
