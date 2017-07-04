@@ -7,10 +7,7 @@
 		}
 
 		$connection = connect_db();
-
-
-	?>
-
+?>
 
 <!DOCTYPE html>
 
@@ -42,10 +39,12 @@
   		</div>
 	</nav>
 	<div class="container">
-		<div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2" role="alert">
+		<div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2 fade in" role="alert">
 	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   			Приветсвую <strong><?php echo $_SESSION['user_login']; ?></strong>
 		</div>
+		<!-- Основная таблица с аднными -->
+		
 	</div>
 
 	<!-- Create new employee modal-window -->
@@ -82,9 +81,17 @@
 							<label class="col-md-2 control-label" for="modal__supervisor">Супервизор: </label>
 							<div class="col-md-8">
 								<select class="form-control" name="modal__supervisor" id="m__sv" required>
-									<option value="romdv">Романьков</option>
-									<option value="kadke">Кадемалиева</option>
-									<option value="fedno">Федоренко</option>
+									<?php
+								$rows = $connection->query("SELECT login, f_name_user
+															FROM users"
+															);
+								$result = $rows->fetch_assoc();
+								do{
+									echo "<option value='".$result[login]."'>".$result[f_name_user]."</option>\n";
+								}
+								while ($result = $rows->fetch_assoc());
+
+								?>
 								</select>
 							</div>
 						</div>
@@ -111,11 +118,11 @@
 			</div>
 			<div class="modal-body">
 			<!-- Здесь скриптом надо будет генерить список сотрудников. Селект по СВ (СВ узнаем при логине и храним в $_SESSION) -->
-				<form class="form-horizontal" role="form" id="modal__work-time">
+				<form class="form-horizontal" role="form" id="modal__work-time" action="includes/add_hours.php" method="POST">
 					<div class="form-group">
-						<label class="control-label col-md-2" for="modal__empl-list">Сотрудники:</label>
+						<label class="control-label col-md-2" for="modal__empl_list">Сотрудники:</label>
 						<div class="col-md-8">
-							<select class="form-control" multiple size="5" name="modal__empl-list" id="m-empl-list">
+							<select class="form-control" multiple="multiple" size="5" name="modal__empl_list[]" id="m-empl-list" required>
 								
 								<!-- Вынимаем из сессии логин СВ, выбираем из БД всех его сотрудников и кладем в список -->
 								<?php
@@ -128,22 +135,34 @@
 									echo "<option value='".$result[id]."'>".$result[l_name]." ".$result[f_name]."</option>\n";
 								}
 								while ($result = $rows->fetch_assoc());
-
 								?>
 
 						</select>		
 						</div>
 					</div>
 					<div class="form-group">
-					<label class="control-label col-md-2" for="modal__count-work-hours">Кол-во часов: </label>
+					<label class="control-label col-md-2" for="modal__hours">Кол-во часов: </label>
 						<div class="col-md-8">
-							<input class="form-control" type="text" name="modal__count-work-hours" id="m__count-work-hours">	
+							<input class="form-control" type="text" name="modal__hours" id="m__count-work-hours" required>
 						</div>
 					</div>
 					<div class="form-group">
-					<label class="control-label col-md-2" for="modal__calendar">Дата: </label>
+						<label for="modal__date_type" class="control-label col-md-2">Тип дня: </label>
+							<div class="col-md-8">
+								<select name="modal__date_type" id="m__date_type" class="form-control">
+									<option value="0">Рабочий</option>
+									<option value="1">Выходной</option>
+									<option value="2">Праздничный-рабочий</option>
+									<option value="3">Больничный</option>
+									<option value="4">Отпуск</option>
+									<option value="5">Отпуск без содержания</option>
+								</select>
+							</div>
+					</div>
+					<div class="form-group">
+					<label class="control-label col-md-2" for="modal__date">Дата: </label>
 						<div class="col-md-8">
-							<input class="form-control" type="date" name="modal__calendar" id="modal__calendar" value="" max="">
+							<input class="form-control" type="date" name="modal__date" id="modal__calendar" value="<?php date(Y-m-d);?>" max="<?php date(Y-m-d);?>" required>
 						</div>
 					</div>						
 
@@ -151,7 +170,7 @@
 			</div>
 			<div class="modal-footer">
 				<div class="col-md-8 col-md-offset-2">
-					<button class="btn btn-default btn-block btn-success" type="submit" form="modal__work-time" value="Внести">Внести</button>
+					<button class="btn btn-default btn-block btn-success" type="submit" form="modal__work-time" name="modal__submit_hours" id="m__submit_hours" value="Внести">Внести</button>
 					<button class="btn btn-default btn-block btn-danger" data-dismiss="modal" value="Отмена">Отмена</button>
 				</div>
 			</div>
@@ -171,11 +190,6 @@
 		</div>
 	</div>
 	</div>
-
-	<script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
-
-	<!-- Latest compiled and minified JavaScript -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	
 	<!-- footer -->
 	<div class="row navbar-fixed-bottom">

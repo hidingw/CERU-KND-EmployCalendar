@@ -29,10 +29,8 @@
 	?>
 <div class="alert alert-success" role="alert">Сотрудник успешно добавлен. <a href="../index.php">Назад</a></div>
 
-<?php
-	header('Location: ../index.php');	
+<?php	
 	} else {
-
 ?>
 
 <div class="container">
