@@ -4,6 +4,10 @@
 	//print_r($_POST);
 	require "db.php";
 
+		if(!isset($_SESSION['user_login'])){
+			header('Location: ../auth.html');
+		}
+
 	$connection = connect_db();
 	//print_r($_SESSION[user_login]);
 	foreach ($_POST[modal__empl_list] as  $empl_id) {
@@ -19,11 +23,11 @@
 
 			$empl_name = $rows->fetch_assoc();
 			echo '
+				<br>
 				<div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">
 					Для сотрудника '.$empl_name[l_name].' уже существует запись за '.$_POST[modal__date].'!
 					<a class="btn btn-default alert-link pull-right" href="../index.php" role="button">Вернуться</a>
 				</div>
-				<br>
 				';
 		}else {
 			$connection->query("INSERT INTO main (id_employee, my_date,	hours,	date_type, 	supervisor)
@@ -40,4 +44,5 @@
 				Данные успешно внесены! <a class="btn btn-default alert-link pull-right" href="../index.php" role="button">Вернуться</a>
 			</div>
 		 ';
+		 echo "$_SESSION[user_login]";
 ?>

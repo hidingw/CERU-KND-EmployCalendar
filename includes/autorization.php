@@ -22,7 +22,13 @@
 			//print_r($_SESSION);
 		}
 	} else {
-		echo "Логин или пароль указаны неверно";
+
+		echo '
+				<br>
+				<div class="alert alert-danger col-md-8 col-md-offset-2" role="alert">
+					Логин или пароль указаны неверно!
+					<a class="btn btn-default alert-link pull-right" href="../index.php" role="button">Вернуться</a>
+				</div>';
 	}
 
 	

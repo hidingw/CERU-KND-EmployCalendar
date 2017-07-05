@@ -39,13 +39,59 @@
   		</div>
 	</nav>
 	<div class="container">
-		<div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2 fade in" role="alert">
-	  		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-  			Приветсвую <strong><?php echo $_SESSION['user_login']; ?></strong>
+		<div class="row">
+			<div class="alert alert-info alert-dismissible col-md-8 col-md-offset-2 fade in" role="alert">
+	  			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+  				Приветсвую <strong><?php echo $_SESSION['user_login']; ?></strong>
+			</div>
 		</div>
 		<!-- Основная таблица с аднными -->
 		
+		<div class="row">
+			<table>
+				<tr>
+					<td>Сотрудник</td>
+				<?php
+
+					$rows = $connection->query("SELECT my_date
+												FROM main
+												WHERE supervisor = '$_SESSION[user_login]'
+												GROUP BY my_date");
+					$tabel_header = $rows->fetch_assoc();
+
+					do {
+						echo "<td>$tabel_header[my_date]</td>";
+					} while ($tabel_header = $rows->fetch_assoc());
+				?>
+				</tr>
+			
+				<tr>
+				<?php
+					$rows = $connection->query("SELECT id, l_name
+												FROM employee
+												WHERE supervisor = '$_SESSION[user_login]'");
+					$empl_name = $rows->fetch_assoc();
+					do {
+						echo "<td>$empl_name[l_name]</td>";
+
+						$rows = $connection->query("SELECT hours
+													 FROM main
+													 WHERE my_date = '$tabel_header[my_date]' AND id_employee = '$empl_name[id]'
+													");
+
+						$hours = $rows->fetch_assoc();
+
+						do {
+							echo "<td>$hours[hours]</td>";
+						} while ($hours = $rows->fetch_assoc());
+
+					} while ($empl_name = $rows->fetch_assoc());
+				?>
+				</tr>
+			</table>
+
 	</div>
+		</div>
 
 	<!-- Create new employee modal-window -->
 	<div class="modal fade" id="new-empl">
